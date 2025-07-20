@@ -205,7 +205,7 @@
         <img src="https://raw.githubusercontent.com/wellingtonsouzapersonal/Formul-rio-de-Anaminese/main/WS%20LOGO%20MARCADA%CC%81GUA.png" alt="Logomarca" class="logo" onerror="this.onerror=null; this.src='https://placehold.co/150x50/cccccc/333333?text=Logo+Não+Encontrada';">
 
         <!-- O formulário principal agora engloba todas as etapas -->
-        <form id="multiStepForm" action="https://formspree.io/f/mpwlarwq" method="POST" class="space-y-6">
+        <form id="multiStepForm" action="https://formspree.io/f/meozeakg" method="POST" class="space-y-6">
 
             <!-- Etapa 1: Formulário de Cadastro -->
             <div id="step1">
@@ -232,11 +232,11 @@
                 <div class="form-group flex flex-col sm:flex-row sm:space-x-4">
                     <div class="w-full sm:w-1/2 mb-4 sm:mb-0">
                         <label for="altura">Altura (cm):</label>
-                        <input type="number" id="altura" name="Altura" min="50" max="300" placeholder="Ex: 175" class="rounded-lg">
+                        <input type="number" id="altura" name="Altura" min="50" max="300" placeholder="Ex: 175" required class="rounded-lg">
                     </div>
                     <div class="w-full sm:w-1/2">
                         <label for="peso">Peso (kg):</label>
-                        <input type="number" id="peso" name="Peso" min="1" max="500" step="0.1" placeholder="Ex: 70.5" class="rounded-lg">
+                        <input type="number" id="peso" name="Peso" min="1" max="500" step="0.1" placeholder="Ex: 70.5" required class="rounded-lg">
                     </div>
                 </div>
 
@@ -251,7 +251,7 @@
                     </div>
                     <div class="w-full sm:w-1/2">
                         <label for="profissao">Profissão:</label>
-                        <input type="text" id="profissao" name="Profissão" class="rounded-lg">
+                        <input type="text" id="profissao" name="Profissão" required class="rounded-lg">
                     </div>
                 </div>
 
@@ -289,7 +289,7 @@
                 <!-- Novo Campo: Instagram -->
                 <div class="form-group">
                     <label for="instagram">Instagram:</label>
-                    <input type="text" id="instagram" name="Instagram" placeholder="@seu_instagram" class="rounded-lg">
+                    <input type="text" id="instagram" name="Instagram" placeholder="@seu_instagram" required class="rounded-lg">
                 </div>
 
                 <!-- Campo: Data de início -->
@@ -521,7 +521,7 @@
                     </div>
                     <div id="sonoDetalhes" class="hidden-group">
                         <label for="horasSonoNoite">Horas/noite:</label>
-                        <input type="number" id="horasSonoNoite" name="Horas de Sono por Noite (Anaminese)" min="0" max="24" class="rounded-lg">
+                        <input type="number" id="horasSonoNoite" name="Horas de Sono por Noite (Anaminese)" min="0" max="24" class="rounded-lg"></textarea>
                     </div>
                 </div>
 
@@ -545,12 +545,12 @@
 
                 <div class="form-group">
                     <label for="resultadoExpectativa">Qual resultado você espera alcançar e em quanto tempo (aproximadamente)?</label>
-                    <textarea id="resultadoExpectativa" name="Resultado e Expectativa (Anaminese)" rows="3" class="rounded-lg"></textarea>
+                    <textarea id="resultadoExpectativa" name="Resultado e Expectativa (Anaminese)" rows="3" required class="rounded-lg"></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="outrasInformacoes">Há algo mais que você gostaria de nos informar sobre sua saúde ou objetivos?</label>
-                    <textarea id="outrasInformacoes" name="Outras Informações (Anaminese)" rows="4" class="rounded-lg"></textarea>
+                    <textarea id="outrasInformacoes" name="Outras Informações (Anaminese)" rows="4" required class="rounded-lg"></textarea>
                 </div>
 
                 <!-- Frase motivacional para a Etapa 2 -->
@@ -610,7 +610,7 @@
                 <!-- Campo: Ingestão de água diária (aproximadamente) -->
                 <div class="form-group">
                     <label for="ingestaoAguaDiaria">Ingestão de água diária (aproximadamente):</label>
-                    <input type="text" id="ingestaoAguaDiaria" name="Ingestão de Água Diária (Anaminese)" placeholder="Ex: 8 copos / 2 litros" class="rounded-lg">
+                    <input type="text" id="ingestaoAguaDiaria" name="Ingestão de Água Diária (Anaminese)" placeholder="Ex: 8 copos / 2 litros" required class="rounded-lg">
                 </div>
 
                 <!-- Campo: Sua alimentação é: -->
@@ -624,7 +624,7 @@
                         <label><input type="radio" name="Alimentação (Anaminese)" value="Ruim"> Ruim</label>
                         <label><input type="radio" name="Alimentação (Anaminese)" value="Outro" id="alimentacaoOutroRadio"> Outro:</label>
                         <div id="alimentacaoOutroDetalhes" class="hidden-group">
-                            <input type="text" id="alimentacaoOutro" name="Outro Tipo de Alimentação (Anaminese)" class="rounded-lg mt-2" placeholder="Especifique outro tipo de alimentação">
+                            <input type="text" id="alimentacaoOutro" name="Outro Tipo de Alimentação (Anaminese)" class="rounded-lg mt-2" placeholder="Especifique outro tipo de alimentação"></textarea>
                         </div>
                     </div>
                 </div>
@@ -826,15 +826,11 @@
             <!-- Etapa 4: Conferência de Dados (inicialmente oculto) -->
             <div id="step4" class="hidden-group">
                 <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Conferência dos Dados</h2>
-                <p class="text-center text-gray-600 mb-6">Por favor, revise todas as informações antes de enviar o formulário.</p>
-
+                <!-- Removidas as mensagens solicitadas -->
                 <div id="reviewDataDisplay" class="review-data space-y-4 p-4 border rounded-lg bg-gray-50">
                     <!-- Os dados revisados serão inseridos aqui pelo JavaScript -->
                     <p>Carregando dados para revisão...</p>
                 </div>
-
-                <!-- Frase motivacional para a Etapa 4 -->
-                <p class="motivational-phrase">Seu compromisso é a chave para o seu sucesso. Estamos juntos nessa!</p>
 
                 <!-- Mensagem de boas-vindas (inicialmente oculta) -->
                 <div id="welcomeMessage" class="welcome-message">
@@ -1186,11 +1182,68 @@
             let allValid = true;
 
             requiredInputs.forEach(input => {
-                if (!input.checkValidity()) {
+                // Para checkboxes e radio buttons, verificar se pelo menos um está selecionado no grupo
+                if (input.type === 'radio') {
+                    const radioGroupName = input.name;
+                    const radioGroup = document.querySelectorAll(`input[name="${radioGroupName}"]`);
+                    let isRadioGroupChecked = false;
+                    radioGroup.forEach(radio => {
+                        if (radio.checked) {
+                            isRadioGroupChecked = true;
+                        }
+                    });
+                    if (!isRadioGroupChecked) {
+                        allValid = false;
+                        // Opcional: Adicionar algum feedback visual para o usuário sobre o grupo de rádio não preenchido
+                    }
+                } else if (input.type === 'checkbox') {
+                    // Se for um checkbox individual e for requerido, verifica se está marcado
+                    if (!input.checked && input.hasAttribute('required')) {
+                        allValid = false;
+                        input.reportValidity(); // Mostra a mensagem de validação do navegador
+                    }
+                }
+                else if (!input.checkValidity()) {
                     input.reportValidity();
                     allValid = false;
                 }
             });
+
+            // Validação específica para grupos de checkboxes onde pelo menos um deve ser selecionado
+            // Exemplo: Objetivos Musculação (apenas se estiver na etapa 2)
+            if (stepId === 'step2') {
+                const objetivosMusculacaoCheckboxes = document.querySelectorAll('input[name="Objetivos Musculação (Anaminese)"]');
+                if (objetivosMusculacaoCheckboxes.length > 0) {
+                    let anyObjetivoMusculacaoChecked = false;
+                    objetivosMusculacaoCheckboxes.forEach(checkbox => {
+                        if (checkbox.checked) {
+                            anyObjetivoMusculacaoChecked = true;
+                        }
+                    });
+                    if (!anyObjetivoMusculacaoChecked) {
+                        allValid = false;
+                        console.error("Pelo menos um objetivo de musculação deve ser selecionado.");
+                    }
+                }
+            }
+
+            // Exemplo: Objetivos Nutricionais (apenas se estiver na etapa 3)
+            if (stepId === 'step3') {
+                const objetivosNutricionaisCheckboxes = document.querySelectorAll('input[name="Objetivos Nutricionais"]');
+                if (objetivosNutricionaisCheckboxes.length > 0) {
+                    let anyObjetivoNutricionalChecked = false;
+                    objetivosNutricionaisCheckboxes.forEach(checkbox => {
+                        if (checkbox.checked) {
+                            anyObjetivoNutricionalChecked = true;
+                        }
+                    });
+                    if (!anyObjetivoNutricionalChecked) {
+                        allValid = false;
+                        console.error("Pelo menos um objetivo nutricional deve ser selecionado.");
+                    }
+                }
+            }
+
             return allValid;
         }
 
@@ -1223,7 +1276,7 @@
                         break;
                     }
                 }
-                if (planejamentAlimentar === 'Não') {
+                if (planejamentoAlimentar === 'Não') {
                     showStep(2); // Volta para a etapa de Anamnese (step2)
                 } else {
                     showStep(currentStep - 1); // Volta normalmente
@@ -1249,14 +1302,12 @@
 
                 if (isConditionMet) {
                     detailsGroup.classList.remove('hidden-group');
-                    detailsGroup.querySelectorAll('input, textarea').forEach(input => {
-                        if (input.type !== 'radio' && input.type !== 'checkbox') {
-                            input.setAttribute('required', 'required');
-                        }
+                    detailsGroup.querySelectorAll('input:not([type="radio"]):not([type="checkbox"]), textarea, select').forEach(input => {
+                         input.setAttribute('required', 'required');
                     });
                 } else {
                     detailsGroup.classList.add('hidden-group');
-                    detailsGroup.querySelectorAll('input, textarea').forEach(input => {
+                    detailsGroup.querySelectorAll('input:not([type="radio"]):not([type="checkbox"]), textarea, select').forEach(input => {
                         input.removeAttribute('required');
                         if (input.type === 'radio' || input.type === 'checkbox') {
                             input.checked = false;
@@ -1282,9 +1333,10 @@
             function updateVisibility() {
                 if (checkbox.checked) {
                     detailsGroup.classList.remove('hidden-group');
-                    // Não torna os campos de horário/alimento obrigatórios por padrão,
-                    // pois o usuário pode querer apenas registrar a refeição sem detalhes.
-                    // Se precisar que sejam obrigatórios, adicione setAttribute('required', 'required') aqui.
+                    // Torna os campos de horário/alimento obrigatórios se a refeição for marcada
+                    detailsGroup.querySelectorAll('input, textarea').forEach(input => {
+                        input.setAttribute('required', 'required');
+                    });
                 } else {
                     detailsGroup.classList.add('hidden-group');
                     detailsGroup.querySelectorAll('input, textarea').forEach(input => {
