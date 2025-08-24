@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário de Cadastro</title>
-    <!-- Inclui o Tailwind CSS para estilização rápida e responsiva -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -209,7 +208,6 @@
         <img src="https://raw.githubusercontent.com/wellingtonsouzapersonal/Formul-rio-de-Anaminese/main/WS%20LOGO%20MARCADA%CC%81GUA.png" alt="Logomarca" class="logo" onerror="this.onerror=null; this.src='https://placehold.co/150x50/cccccc/333333?text=Logo+Não+Encontrada';">
         <form id="multiStepForm" action="https://formspree.io/f/meozeakg" method="POST" class="space-y-6">
 
-            <!-- Etapa 1: Formulário de Cadastro -->
             <div id="step1">
                 <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Formulário de Cadastro</h2>
                 <div class="section-title">Informações Pessoais</div>
@@ -321,6 +319,7 @@
                         <label><input type="radio" name="Planejamento Alimentar" value="Sim" required onchange="calculatePrice()"> Sim</label>
                         <label><input type="radio" name="Planejamento Alimentar" value="Não" onchange="calculatePrice()"> Não</label>
                     </div>
+                    <p id="planejamentoOnlineWarning" class="error-message hidden-group">⚠️ O plano Online exige a contratação do planejamento alimentar.</p>
                 </div>
 
                 <div class="form-group">
@@ -359,7 +358,6 @@
                 <button type="button" onclick="nextStep(1)" class="button-highlight">Próximo</button>
             </div>
 
-            <!-- Etapa 2: Formulário de Anaminese -->
             <div id="step2" class="hidden-group">
                 <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Formulário de Anaminese</h2>
 
@@ -437,7 +435,7 @@
                         <label class="mt-2">Frequência:</label>
                         <div class="radio-group flex mt-2">
                             <label><input type="radio" name="Frequência Fuma (Anaminese)" value="Frequentemente" required> Frequentemente</label>
-                            <label id="socialmenteFumaLabel"><input type="radio" name="Frequência Fuma (Anaminese)" value="Socialmente"> Socialmente</label>
+                            <label><input type="radio" name="Frequência Fuma (Anaminese)" value="Socialmente"> Socialmente</label>
                             <label><input type="radio" name="Frequência Fuma (Anaminese)" value="Raramente"> Raramente</label>
                         </div>
                     </div>
@@ -541,7 +539,6 @@
                 </div>
             </div>
 
-            <!-- Etapa 3: Formulário Nutricional -->
             <div id="step3" class="hidden-group">
                 <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Formulário Nutricional</h2>
                 <div class="section-title">Histórico de Saúde (Nutricional)</div>
@@ -582,355 +579,421 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Possui alergia alimentar?</label>
+                    <label>Faz uso de suplementos alimentares?</label>
                     <div class="radio-group flex mt-2">
-                        <label><input type="radio" name="Alergia Alimentar (Nutricional)" value="Sim" required onchange="toggleDetails('alergiaAlimentarNutricional', this)"> Sim</label>
-                        <label><input type="radio" name="Alergia Alimentar (Nutricional)" value="Não" onchange="toggleDetails('alergiaAlimentarNutricional', this)"> Não</label>
+                        <label><input type="radio" name="Uso de Suplementos (Nutricional)" value="Sim" required onchange="toggleDetails('suplementosNutricional', this)"> Sim</label>
+                        <label><input type="radio" name="Uso de Suplementos (Nutricional)" value="Não" onchange="toggleDetails('suplementosNutricional', this)"> Não</label>
                     </div>
-                    <div id="alergiaAlimentarDetalhesNutricional" class="hidden-group">
-                        <label for="qualAlergiaNutricional" class="mt-2">Qual(is) alergia(s):</label>
-                        <textarea id="qualAlergiaNutricional" name="Qual Alergia Alimentar (Nutricional)" rows="2" class="rounded-lg"></textarea>
+                    <div id="suplementosNutricionalDetalhes" class="hidden-group">
+                        <label for="quaisSuplementosNutricional" class="mt-2">Qual(is) e frequência:</label>
+                        <textarea id="quaisSuplementosNutricional" name="Qual Suplementos (Nutricional)" rows="2" class="rounded-lg"></textarea>
                     </div>
                 </div>
 
-                <div class="section-title">Hábitos Alimentares</div>
+                <div class="section-title">Rotina Alimentar</div>
+                <p class="observation-text">Descreva sua rotina alimentar o mais detalhadamente possível. Quanto mais informações, melhor!</p>
 
                 <div class="form-group">
-                    <label>Você pula alguma refeição principal (café da manhã, almoço, jantar)?</label>
+                    <label>Qualidade do sono:</label>
                     <div class="radio-group flex mt-2">
-                        <label><input type="radio" name="Pula Refeição Principal (Nutricional)" value="Sim" required onchange="toggleDetails('pulaRefeicaoNutricional', this)"> Sim</label>
-                        <label><input type="radio" name="Pula Refeição Principal (Nutricional)" value="Não" onchange="toggleDetails('pulaRefeicaoNutricional', this)"> Não</label>
-                    </div>
-                    <div id="pulaRefeicaoDetalhesNutricional" class="hidden-group">
-                        <label for="qualRefeicaoPula" class="mt-2">Qual(is) refeição(ões):</label>
-                        <textarea id="qualRefeicaoPula" name="Qual Refeição Pula (Nutricional)" rows="2" class="rounded-lg"></textarea>
+                        <label><input type="radio" name="Qualidade do Sono (Nutricional)" value="Boa" required> Boa</label>
+                        <label><input type="radio" name="Qualidade do Sono (Nutricional)" value="Regular"> Regular</label>
+                        <label><input type="radio" name="Qualidade do Sono (Nutricional)" value="Ruim"> Ruim</label>
                     </div>
                 </div>
-
+                
                 <div class="form-group">
-                    <label>Costuma ingerir frutas e vegetais diariamente?</label>
-                    <div class="radio-group flex mt-2">
-                        <label><input type="radio" name="Ingere Frutas e Vegetais (Nutricional)" value="Sim" required> Sim</label>
-                        <label><input type="radio" name="Ingere Frutas e Vegetais (Nutricional)" value="Não"> Não</label>
-                    </div>
+                    <label for="acordaHoraNutricional">A que horas geralmente você acorda?</label>
+                    <input type="time" id="acordaHoraNutricional" name="Horário que Acorda (Nutricional)" required class="rounded-lg">
                 </div>
 
                 <div class="form-group">
-                    <label>Quantidade de água (litros/dia):</label>
-                    <input type="number" id="quantidadeAgua" name="Quantidade de Água (Nutricional)" min="0" step="0.5" required class="rounded-lg" placeholder="Ex: 2.5">
+                    <label for="dormeHoraNutricional">A que horas geralmente você dorme?</label>
+                    <input type="time" id="dormeHoraNutricional" name="Horário que Dorme (Nutricional)" required class="rounded-lg">
                 </div>
 
                 <div class="form-group">
-                    <label>Consumo de fast food, doces e ultraprocessados:</label>
+                    <label>Sente necessidade de beber café?</label>
                     <div class="radio-group flex mt-2">
-                        <label><input type="radio" name="Consumo Fast Food (Nutricional)" value="Muito Frequente" required> Muito Frequente</label>
-                        <label><input type="radio" name="Consumo Fast Food (Nutricional)" value="Ocasional"> Ocasional</label>
-                        <label><input type="radio" name="Consumo Fast Food (Nutricional)" value="Raramente"> Raramente</label>
+                        <label><input type="radio" name="Bebe Café (Nutricional)" value="Sim" required onchange="toggleDetails('cafeNutricional', this)"> Sim</label>
+                        <label><input type="radio" name="Bebe Café (Nutricional)" value="Não" onchange="toggleDetails('cafeNutricional', this)"> Não</label>
+                    </div>
+                    <div id="cafeNutricionalDetalhes" class="hidden-group">
+                        <label for="qualCafeNutricional" class="mt-2">Quantidade de xícaras/dia e tipo (com ou sem açúcar):</label>
+                        <textarea id="qualCafeNutricional" name="Qual Café (Nutricional)" rows="2" class="rounded-lg"></textarea>
                     </div>
                 </div>
 
-                <p class="motivational-phrase">Se alimentar bem é uma forma de autocuidado que te dá energia para brilhar.</p>
+                <div class="form-group">
+                    <label for="coposAguaNutricional">Quantos copos de água (200 ml) você bebe por dia?</label>
+                    <input type="number" id="coposAguaNutricional" name="Quantidade Água (Nutricional)" min="0" required class="rounded-lg">
+                </div>
+
+                <div class="form-group">
+                    <label for="ingredientesNaoGostaNutricional">Quais ingredientes/alimentos você não gosta?</label>
+                    <textarea id="ingredientesNaoGostaNutricional" name="Ingredientes que Não Gosta (Nutricional)" rows="2" class="rounded-lg"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="melhorHorarioTreinoNutricional">Qual o melhor horário para treinar?</label>
+                    <select id="melhorHorarioTreinoNutricional" name="Melhor Horário para Treino (Nutricional)" required class="rounded-lg">
+                        <option value="">Selecione uma opção</option>
+                        <option value="Manhã">Manhã (5h - 11h)</option>
+                        <option value="Tarde">Tarde (12h - 17h)</option>
+                        <option value="Noite">Noite (18h - 22h)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="refeicaoPreTreinoNutricional">O que você come na refeição pré-treino?</label>
+                    <textarea id="refeicaoPreTreinoNutricional" name="Refeição Pré-Treino (Nutricional)" rows="2" class="rounded-lg" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="refeicaoPosTreinoNutricional">O que você come na refeição pós-treino?</label>
+                    <textarea id="refeicaoPosTreinoNutricional" name="Refeição Pós-Treino (Nutricional)" rows="2" class="rounded-lg" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="refeicoesDiaNutricional">Quantas refeições faz por dia?</label>
+                    <input type="number" id="refeicoesDiaNutricional" name="Refeições por Dia (Nutricional)" min="1" required class="rounded-lg">
+                </div>
+                
+                <div class="form-group">
+                    <label>Descreva em detalhes as suas refeições do dia:</label>
+                    <div class="meal-details space-y-4">
+                        <div class="form-group">
+                            <label for="cafeManha">Café da Manhã:</label>
+                            <textarea id="cafeManha" name="Café da Manhã (Nutricional)" rows="2" class="rounded-lg"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="almoco">Almoço:</label>
+                            <textarea id="almoco" name="Almoço (Nutricional)" rows="2" class="rounded-lg"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="lancheTarde">Lanche da Tarde:</label>
+                            <textarea id="lancheTarde" name="Lanche da Tarde (Nutricional)" rows="2" class="rounded-lg"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="jantar">Jantar:</label>
+                            <textarea id="jantar" name="Jantar (Nutricional)" rows="2" class="rounded-lg"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="motivational-phrase">O segredo é começar. O segredo é continuar. O segredo é ter paciência. O segredo é o processo.</p>
 
                 <div class="flex justify-between mt-6">
                     <button type="button" onclick="prevStep()" class="w-1/2 mr-2 bg-gray-500 hover:bg-gray-600">Voltar</button>
-                    <button type="button" onclick="nextStep(3)" class="button-highlight">Próximo</button>
+                    <button type="button" onclick="nextStep(3)" class="button-highlight">Revisar dados</button>
                 </div>
             </div>
-
-            <!-- Etapa 4: Revisão e Confirmação (inicialmente oculto) -->
+            
             <div id="step4" class="hidden-group">
                 <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Revisar e Enviar</h2>
-                <div class="review-data bg-gray-100 p-6 rounded-lg border border-gray-200">
-                    <div id="reviewContent"></div>
-                </div>
-                <div class="welcome-message" id="welcomeMessage">
-                    Formulário enviado com sucesso! Aguarde o contato do Personal.
-                </div>
-                <p class="motivational-phrase">Seu primeiro passo para a transformação foi dado! Parabéns!</p>
+                <div id="reviewContent" class="review-data space-y-4">
+                    </div>
+                
+                <p class="motivational-phrase">Parabéns por chegar até aqui! Revise suas informações com atenção antes de enviar.</p>
+
                 <div class="flex justify-between mt-6">
                     <button type="button" onclick="prevStep()" class="w-1/2 mr-2 bg-gray-500 hover:bg-gray-600">Voltar</button>
-                    <button type="submit" id="submitBtn" class="button-highlight">Enviar</button>
+                    <button type="submit" class="button-highlight">Enviar Formulário</button>
                 </div>
+            </div>
+            
+            <div id="successMessage" class="welcome-message">
+                <p>Formulário enviado com sucesso! Aguarde o contato da nossa equipe. Obrigado por confiar no nosso trabalho! 🤝</p>
             </div>
         </form>
     </div>
 
     <script>
-        // Mapeamento de preços por plano e frequência semanal
-        const planPrices = {
-            'Trimestral Individual': { '2': 300, '3': 350, '4': 400, '5': 450 },
-            'Semestral Individual': { '2': 280, '3': 330, '4': 380, '5': 430 },
-            'Trimestral Casal': { '2': 500, '3': 550, '4': 600, '5': 650 },
-            'Semestral Casal': { '2': 480, '3': 530, '4': 580, '5': 630 },
-            'Online': 250, // Preço fixo para o plano online
-        };
-
-        // Mapeamento dos detalhes dos planos
-        const planDescriptions = {
-            'Trimestral Individual': "Plano de 3 meses de duração, treino individual presencial. Acompanhamento e avaliação física a cada 30 dias.",
-            'Semestral Individual': "Plano de 6 meses de duração, treino individual presencial. Acompanhamento e avaliação física a cada 30 dias.",
-            'Trimestral Casal': "Plano de 3 meses de duração, treino presencial para casal. Acompanhamento e avaliação física a cada 30 dias.",
-            'Semestral Casal': "Plano de 6 meses de duração, treino presencial para casal. Acompanhamento e avaliação física a cada 30 dias.",
-            'Online': "Plano totalmente online, via plataforma de treino exclusiva. Acesso a treinos personalizados, acompanhamento e suporte via WhatsApp.",
-        };
-
         let currentStep = 1;
+        const totalSteps = 4;
+        const form = document.getElementById('multiStepForm');
+        
+        // Dados de preços (valores mensais)
+        const prices = {
+            'Trimestral Individual': 280,
+            'Semestral Individual': 250,
+            'Trimestral Casal': 450,
+            'Semestral Casal': 420,
+            'Online': 120
+        };
 
-        document.addEventListener('DOMContentLoaded', () => {
-            // Adiciona listener para o campo de data de nascimento para calcular a idade
-            const dataNascimentoInput = document.getElementById('dataNascimento');
-            if (dataNascimentoInput) {
-                dataNascimentoInput.addEventListener('change', updateAge);
-            }
+        // Dados de acréscimos de pagamento
+        const paymentFees = {
+            'Dinheiro': 0,
+            'Pix': 0,
+            'Débito': 0.0199,
+            'Crédito (à vista)': 0.0498,
+            'Crédito (parcelado até 6x)': 0.06,
+            'Boleto': 5 // Valor fixo
+        };
 
-            // Adiciona listeners para os radio buttons de plano e planejamento para recalcular o preço
-            const form = document.getElementById('multiStepForm');
-            form.addEventListener('change', (event) => {
-                const target = event.target;
-                if (target.name === 'Plano Escolhido' || target.name === 'Planejamento Alimentar') {
-                    calculatePrice();
+        const planDetails = {
+            'Trimestral Individual': '✅ Acompanhamento presencial\n✅ Planilha de treino individualizada\n✅ Avaliação física mensal',
+            'Semestral Individual': '✅ Acompanhamento presencial\n✅ Planilha de treino individualizada\n✅ Avaliação física mensal\n🎁 Desconto especial',
+            'Trimestral Casal': '✅ Acompanhamento presencial para o casal\n✅ Planilha de treino individualizada\n✅ Avaliação física mensal',
+            'Semestral Casal': '✅ Acompanhamento presencial para o casal\n✅ Planilha de treino individualizada\n✅ Avaliação física mensal\n🎁 Desconto especial',
+            'Online': '✅ Planilha de treino online\n✅ Acompanhamento a distância\n✅ Avaliação online\n⚠️ Requer planejamento alimentar'
+        };
+
+        const steps = [
+            document.getElementById('step1'),
+            document.getElementById('step2'),
+            document.getElementById('step3'),
+            document.getElementById('step4')
+        ];
+
+        // Adiciona um listener para o evento de submit do formulário para tratar o envio com Formspree
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+            const formStatus = document.getElementById('successMessage');
+            
+            // Simula o envio
+            formStatus.style.display = 'block';
+            
+            // Envia os dados para o Formspree
+            const formData = new FormData(form);
+            fetch(form.action, {
+                method: form.method,
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
                 }
+            }).then(response => {
+                if (response.ok) {
+                    console.log('Formulário enviado com sucesso!');
+                } else {
+                    response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) {
+                            alert(data["errors"].map(error => error["message"]).join(", "));
+                        } else {
+                            alert('Ops! Algo deu errado ao enviar o formulário.');
+                        }
+                    })
+                }
+            }).catch(error => {
+                alert('Ocorreu um erro na conexão: ' + error);
             });
-
-            // Adiciona listener para os campos de seleção de frequência e pagamento
-            const frequenciaSemanaSelect = document.getElementById('frequenciaSemana');
-            const formaPagamentoSelect = document.getElementById('formaPagamento');
-            if (frequenciaSemanaSelect) {
-                frequenciaSemanaSelect.addEventListener('change', calculatePrice);
-            }
-            if (formaPagamentoSelect) {
-                formaPagamentoSelect.addEventListener('change', calculatePrice);
-            }
         });
 
-        // Função para calcular e exibir a idade
-        function updateAge() {
-            const dataNasc = document.getElementById('dataNascimento').value;
-            const idadeDisplay = document.getElementById('idadeDisplay');
-            const idadeHidden = document.getElementById('idadeHidden');
+        // Event listener para calcular a idade ao mudar a data de nascimento
+        document.getElementById('dataNascimento').addEventListener('change', function() {
+            const birthDate = new Date(this.value);
+            if (isNaN(birthDate)) return;
 
-            if (dataNasc) {
-                const dataAtual = new Date();
-                const dataNascimento = new Date(dataNasc);
-                let idade = dataAtual.getFullYear() - dataNascimento.getFullYear();
-                const mes = dataAtual.getMonth() - dataNascimento.getMonth();
-                if (mes < 0 || (mes === 0 && dataAtual.getDate() < dataNascimento.getDate())) {
-                    idade--;
-                }
-                idadeDisplay.textContent = `(${idade} anos)`;
-                idadeHidden.value = idade; // Atualiza o campo oculto para envio
-            } else {
-                idadeDisplay.textContent = '';
-                idadeHidden.value = '';
+            const today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDifference = today.getMonth() - birthDate.getMonth();
+            if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
             }
-        }
+            document.getElementById('idadeDisplay').innerText = `(${age} anos)`;
+            document.getElementById('idadeHidden').value = age;
+        });
 
-        // Função para mostrar/ocultar campos de detalhes com base na resposta "Sim" ou "Não"
-        function toggleDetails(groupName, radio) {
-            const detailsDiv = document.getElementById(groupName + 'Detalhes');
-            if (detailsDiv) {
-                if (radio.value === 'Sim') {
-                    detailsDiv.style.display = 'block';
-                    // Requer os campos de texto se a opção "Sim" for selecionada
-                    const textarea = detailsDiv.querySelector('textarea');
-                    const input = detailsDiv.querySelector('input[type="number"]');
-                    if (textarea) textarea.required = true;
-                    if (input) input.required = true;
-                } else {
-                    detailsDiv.style.display = 'none';
-                    // Remove a obrigatoriedade se a opção "Não" for selecionada
-                    const textarea = detailsDiv.querySelector('textarea');
-                    const input = detailsDiv.querySelector('input[type="number"]');
-                    if (textarea) {
-                        textarea.required = false;
-                        textarea.value = ''; // Limpa o valor
-                    }
-                    if (input) {
-                        input.required = false;
-                        input.value = ''; // Limpa o valor
-                    }
-                }
-            }
-        }
-
-        // Função para calcular o preço estimado
         function calculatePrice() {
-            const planoRadio = document.querySelector('input[name="Plano Escolhido"]:checked');
-            const planejamentoRadio = document.querySelector('input[name="Planejamento Alimentar"]:checked');
-            const frequenciaSelect = document.getElementById('frequenciaSemana');
-            const formaPagamentoSelect = document.getElementById('formaPagamento');
-            const valorEstimadoDiv = document.getElementById('valorEstimado');
-            const valorEstimadoHidden = document.getElementById('valorEstimadoHidden');
+            const plano = document.querySelector('input[name="Plano Escolhido"]:checked');
+            const frequencia = document.getElementById('frequenciaSemana').value;
+            const planejamento = document.querySelector('input[name="Planejamento Alimentar"]:checked');
+            const formaPagamento = document.getElementById('formaPagamento').value;
+            const valorDisplay = document.getElementById('valorEstimado');
+            const valorHidden = document.getElementById('valorEstimadoHidden');
             const planDetailsDisplay = document.getElementById('planDetailsDisplay');
+            const planejamentoOnlineWarning = document.getElementById('planejamentoOnlineWarning');
 
-            let basePrice = 0;
-            let planoSelecionado = null;
-            let frequenciaSelecionada = frequenciaSelect.value;
-            let planejamentoAlimentar = planejamentoRadio ? planejamentoRadio.value : null;
-
-            if (planoRadio) {
-                planoSelecionado = planoRadio.value;
-            }
-
-            // Exibe os detalhes do plano selecionado
-            if (planoSelecionado && planDescriptions[planoSelecionado]) {
-                planDetailsDisplay.innerHTML = `<p>${planDescriptions[planoSelecionado]}</p>`;
+            // Resetar o aviso de planejamento online
+            planejamentoOnlineWarning.classList.add('hidden-group');
+            
+            // Mostra os detalhes do plano selecionado
+            if (plano) {
                 planDetailsDisplay.classList.remove('hidden-group');
+                let detailsText = planDetails[plano.value];
+                planDetailsDisplay.innerHTML = `<strong>Detalhes do Plano:</strong><br>${detailsText.replace(/\\n/g, '<br>')}`;
+                if (plano.value === 'Online' && planejamento?.value === 'Não') {
+                    planejamentoOnlineWarning.classList.remove('hidden-group');
+                }
             } else {
                 planDetailsDisplay.classList.add('hidden-group');
             }
 
-            // Calcula o preço base
-            if (planoSelecionado === 'Online') {
-                basePrice = planPrices[planoSelecionado];
-            } else if (planoSelecionado && frequenciaSelecionada) {
-                basePrice = planPrices[planoSelecionado][frequenciaSelecionada];
+            if (!plano || !frequencia) {
+                valorDisplay.innerText = "Selecione as opções para ver o valor estimado.";
+                valorHidden.value = '';
+                return;
             }
 
-            // Adiciona o custo do planejamento alimentar se selecionado "Sim"
-            if (planejamentoAlimentar === 'Sim') {
-                basePrice += 100; // Adiciona R$100,00 para o planejamento
+            let basePrice = prices[plano.value];
+            let finalPrice = 0;
+
+            if (plano.value === 'Online') {
+                if (planejamento?.value === 'Sim') {
+                    finalPrice = basePrice + 100; // Exemplo de custo adicional para planejamento online
+                } else {
+                    finalPrice = basePrice;
+                }
+            } else {
+                const multiplier = parseInt(frequencia) > 0 ? parseInt(frequencia) : 1;
+                finalPrice = basePrice;
+                if (planejamento?.value === 'Sim') {
+                    finalPrice += 100;
+                }
             }
 
             // Aplica o acréscimo da forma de pagamento
-            let formaPagamento = formaPagamentoSelect.value;
-            let finalPrice = basePrice;
-            if (formaPagamento === 'Débito') {
-                finalPrice += finalPrice * 0.0199;
-            } else if (formaPagamento === 'Crédito (à vista)') {
-                finalPrice += finalPrice * 0.0498;
-            } else if (formaPagamento === 'Crédito (parcelado até 6x)') {
-                finalPrice += finalPrice * 0.06;
-            } else if (formaPagamento === 'Boleto') {
-                finalPrice += 5;
+            if (formaPagamento) {
+                const taxa = paymentFees[formaPagamento];
+                if (formaPagamento === 'Boleto') {
+                    finalPrice += taxa;
+                } else {
+                    finalPrice = finalPrice * (1 + taxa);
+                }
             }
 
-            if (basePrice > 0 && formaPagamento) {
-                valorEstimadoDiv.textContent = `Valor Estimado: R$ ${finalPrice.toFixed(2)}`;
-                valorEstimadoHidden.value = finalPrice.toFixed(2);
+            if (finalPrice > 0) {
+                valorDisplay.innerText = `Valor Estimado: R$ ${finalPrice.toFixed(2).replace('.', ',')}`;
+                valorHidden.value = finalPrice.toFixed(2);
             } else {
-                valorEstimadoDiv.textContent = "Selecione as opções para ver o valor estimado.";
-                valorEstimadoHidden.value = '';
+                valorDisplay.innerText = "Selecione as opções para ver o valor estimado.";
+                valorHidden.value = '';
             }
         }
+        
+        // Chamada inicial para mostrar o preço correto se já houver opções selecionadas ao carregar a página
+        calculatePrice();
 
-        // Função para validar campos obrigatórios
-        function validateStep(stepId) {
-            const step = document.getElementById('step' + stepId);
-            const requiredFields = step.querySelectorAll('[required]');
-            let isValid = true;
-            requiredFields.forEach(field => {
-                const parentGroup = field.closest('.form-group');
-                let errorMessage = parentGroup.querySelector('.error-message');
-                if (!field.checkValidity()) {
-                    isValid = false;
-                    if (!errorMessage) {
-                        errorMessage = document.createElement('p');
-                        errorMessage.className = 'error-message';
-                        parentGroup.appendChild(errorMessage);
-                    }
-                    errorMessage.textContent = 'Este campo é obrigatório.';
-                    // Para os radio buttons, a validação é um pouco diferente
-                    if (field.type === 'radio' && !document.querySelector(`input[name="${field.name}"]:checked`)) {
-                        isValid = false;
+        // Adiciona listeners para os campos que afetam o preço
+        document.querySelectorAll('input[name="Plano Escolhido"], input[name="Planejamento Alimentar"]').forEach(radio => {
+            radio.addEventListener('change', calculatePrice);
+        });
+        document.getElementById('frequenciaSemana').addEventListener('change', calculatePrice);
+        document.getElementById('formaPagamento').addEventListener('change', calculatePrice);
+
+
+        function validateStep(step) {
+            const currentStepDiv = steps[step - 1];
+            const requiredInputs = currentStepDiv.querySelectorAll('[required]');
+            let allValid = true;
+
+            requiredInputs.forEach(input => {
+                if (!input.checkValidity()) {
+                    allValid = false;
+                    // Adiciona uma classe de erro ou mostra uma mensagem
+                    input.classList.add('border-red-500', 'ring-2', 'ring-red-500');
+                    if (input.type === 'radio' && input.name) {
+                        const radioGroup = document.querySelector(`input[name="${input.name}"]`).closest('.form-group');
+                        let errorMessage = radioGroup.querySelector('.error-message');
                         if (!errorMessage) {
-                           errorMessage = document.createElement('p');
-                           errorMessage.className = 'error-message';
-                           parentGroup.appendChild(errorMessage);
+                            errorMessage = document.createElement('p');
+                            errorMessage.className = 'error-message';
+                            radioGroup.appendChild(errorMessage);
                         }
-                        errorMessage.textContent = 'Por favor, selecione uma opção.';
+                        errorMessage.innerText = 'Este campo é obrigatório.';
                     }
                 } else {
-                    if (errorMessage) {
-                        errorMessage.remove();
+                    input.classList.remove('border-red-500', 'ring-2', 'ring-red-500');
+                    const radioGroup = document.querySelector(`input[name="${input.name}"]`)?.closest('.form-group');
+                    if (radioGroup) {
+                        const errorMessage = radioGroup.querySelector('.error-message');
+                        if (errorMessage) {
+                            errorMessage.remove();
+                        }
                     }
                 }
             });
 
-            // Lógica extra para campos dinâmicos que podem ser required
-            const dynamicFields = step.querySelectorAll('.hidden-group textarea[required], .hidden-group input[required]');
-            dynamicFields.forEach(field => {
-                const parentGroup = field.closest('.form-group');
-                let errorMessage = parentGroup.querySelector('.error-message');
-                if (field.style.display !== 'none' && !field.value) {
-                    isValid = false;
-                    if (!errorMessage) {
-                        errorMessage = document.createElement('p');
-                        errorMessage.className = 'error-message';
-                        parentGroup.appendChild(errorMessage);
-                    }
-                    errorMessage.textContent = 'Este campo é obrigatório, pois você marcou "Sim".';
-                } else if (errorMessage) {
-                    errorMessage.remove();
+            // Lógica adicional para o plano Online
+            if (step === 1) {
+                const planoOnline = document.querySelector('input[name="Plano Escolhido"][value="Online"]:checked');
+                const planejamentoSim = document.querySelector('input[name="Planejamento Alimentar"][value="Sim"]:checked');
+                if (planoOnline && !planejamentoSim) {
+                    alert('Para o plano Online, o planejamento alimentar é obrigatório.');
+                    allValid = false;
                 }
-            });
+            }
 
-            return isValid;
+            return allValid;
         }
 
-        // Função para avançar para a próxima etapa
         function nextStep(step) {
             if (!validateStep(step)) {
+                alert('Por favor, preencha todos os campos obrigatórios.');
                 return;
             }
-            document.getElementById('step' + currentStep).classList.add('hidden-group');
-            currentStep++;
-            document.getElementById('step' + currentStep).classList.remove('hidden-group');
-            if (currentStep === 4) {
-                showReview();
-            }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
 
-        // Função para voltar para a etapa anterior
+            if (step < totalSteps) {
+                steps[currentStep - 1].classList.add('hidden-group');
+                currentStep++;
+                if (currentStep === totalSteps) {
+                    generateReview();
+                }
+                steps[currentStep - 1].classList.remove('hidden-group');
+            }
+        }
+        
         function prevStep() {
-            document.getElementById('step' + currentStep).classList.add('hidden-group');
-            currentStep--;
-            document.getElementById('step' + currentStep).classList.remove('hidden-group');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (currentStep > 1) {
+                steps[currentStep - 1].classList.add('hidden-group');
+                currentStep--;
+                steps[currentStep - 1].classList.remove('hidden-group');
+            }
         }
 
-        // Função para exibir a revisão dos dados
-        function showReview() {
-            const reviewContent = document.getElementById('reviewContent');
-            reviewContent.innerHTML = '';
-            const form = document.getElementById('multiStepForm');
-            const formData = new FormData(form);
-
-            // Adiciona um título para cada seção
-            const sections = {
-                'Nome Completo': 'Informações Pessoais',
-                'Cirurgia Últimos 12 Meses (Anaminese)': 'Histórico de Aptidão Física',
-                'Medicação Contínua (Nutricional)': 'Histórico de Saúde (Nutricional)',
-            };
-            let currentSection = '';
-
-            for (let [key, value] of formData.entries()) {
-                // Pula campos vazios ou não relevantes para a revisão, como a idade oculta
-                if (!value || key === 'Idade') {
-                    continue;
-                }
-
-                // Verifica se é uma nova seção e adiciona o título
-                if (sections[key] && sections[key] !== currentSection) {
-                    const sectionTitle = document.createElement('h3');
-                    sectionTitle.className = 'text-lg font-bold text-gray-700 mb-2 mt-4';
-                    sectionTitle.textContent = sections[key];
-                    reviewContent.appendChild(sectionTitle);
-                    currentSection = sections[key];
-                } else if (!sections[key] && !currentSection.includes('Hábitos')) {
-                    const sectionTitle = document.createElement('h3');
-                    sectionTitle.className = 'text-lg font-bold text-gray-700 mb-2 mt-4';
-                    sectionTitle.textContent = 'Hábitos de Vida e Treino';
-                    reviewContent.appendChild(sectionTitle);
-                    currentSection = 'Hábitos de Vida e Treino';
-                }
-
-                // Cria o parágrafo de exibição
-                const p = document.createElement('p');
-                p.innerHTML = `<strong>${key}:</strong> ${value}`;
-                reviewContent.appendChild(p);
+        function toggleDetails(type, radio) {
+            const targetDiv = document.getElementById(type + 'Detalhes');
+            if (radio.value === 'Sim') {
+                targetDiv.classList.remove('hidden-group');
+            } else {
+                targetDiv.classList.add('hidden-group');
             }
+        }
+        
+        function generateReview() {
+            const reviewContainer = document.getElementById('reviewContent');
+            reviewContainer.innerHTML = '';
+            
+            const formData = new FormData(form);
+            const data = {};
+            for (let [key, value] of formData.entries()) {
+                // Tratar checkboxes, pois FormData agrupa apenas se houver múltiplos valores
+                if (key.includes('Objetivos Musculação')) {
+                    if (!data[key]) {
+                        data[key] = [];
+                    }
+                    data[key].push(value);
+                } else {
+                    data[key] = value;
+                }
+            }
+
+            let htmlContent = '';
+            
+            // Reagrupar por seção
+            const sections = {
+                'Informações Pessoais': ['Nome Completo', 'Data de Nascimento', 'Idade', 'Altura', 'Peso', 'Gênero', 'Profissão', 'Telefone de Contato', 'Contato de Emergência', 'CPF', 'Endereço', 'E-mail', 'Instagram', 'Data de Início', 'Plano Escolhido', 'Planejamento Alimentar', 'Frequência Semanal', 'Forma de Pagamento', 'Valor Estimado Mensal'],
+                'Histórico de Aptidão Física': ['Cirurgia Últimos 12 Meses (Anaminese)', 'Qual Cirurgia e Data (Anaminese)', 'Problemas Coluna (Anaminese)', 'Qual Problema Coluna (Anaminese)', 'Problemas Articulações (Anaminese)', 'Qual Problema Articulação (Anaminese)', 'Lesão Muscular Articular (Anaminese)', 'Qual Lesão e Tratamento (Anaminese)', 'Restrição Médica (Anaminese)', 'Qual Restrição Médica (Anaminese)', 'Fuma (Anaminese)', 'Frequência Fuma (Anaminese)', 'Ingere Álcool (Anaminese)', 'Frequência Álcool (Anaminese)', 'Pratica Atividade Física (Anaminese)', 'Qual Atividade, Frequência e Tempo (Anaminese)', 'Nível Experiência Musculação (Anaminese)', 'Tempo Treinou (Anaminese)', 'Treinou Personal Trainer (Anaminese)', 'Qualidade do Sono (Anaminese)'],
+                'Objetivos e Expectativas': ['Objetivos Musculação (Anaminese)', 'Especificar Reabilitação (Anaminese)', 'Resultado e Expectativa (Anaminese)', 'Outras Informações (Anaminese)'],
+                'Formulário Nutricional': ['Medicação Contínua (Nutricional)', 'Qual Medicação (Nutricional)', 'Doença Crônica (Nutricional)', 'Qual Doença Crônica (Nutricional)', 'Intolerância Alimentar (Nutricional)', 'Qual Intolerância Alimentar (Nutricional)', 'Uso de Suplementos (Nutricional)', 'Qual Suplementos (Nutricional)', 'Qualidade do Sono (Nutricional)', 'Horário que Acorda (Nutricional)', 'Horário que Dorme (Nutricional)', 'Bebe Café (Nutricional)', 'Qual Café (Nutricional)', 'Quantidade Água (Nutricional)', 'Ingredientes que Não Gosta (Nutricional)', 'Melhor Horário para Treino (Nutricional)', 'Refeição Pré-Treino (Nutricional)', 'Refeição Pós-Treino (Nutricional)', 'Refeições por Dia (Nutricional)', 'Café da Manhã (Nutricional)', 'Almoço (Nutricional)', 'Lanche da Tarde (Nutricional)', 'Jantar (Nutricional)']
+            };
+
+            for (const sectionTitle in sections) {
+                htmlContent += `<h3 class="section-title">${sectionTitle}</h3>`;
+                sections[sectionTitle].forEach(key => {
+                    let value = data[key] || '';
+                    if (value && typeof value === 'object') {
+                        value = value.join(', ');
+                    }
+                    if (value) {
+                        const formattedKey = key.replace(/\(Anaminese\)|\(Nutricional\)|\(kg\)|\(cm\)|\/s/g, '').trim();
+                        htmlContent += `<p><strong>${formattedKey}:</strong> ${value}</p>`;
+                    }
+                });
+            }
+
+            reviewContainer.innerHTML = htmlContent;
         }
     </script>
 </body>
